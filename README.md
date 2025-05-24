@@ -10,7 +10,9 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  path_to_regexp: ^latest # Replace with the latest version
+  path_to_regexp:
+    git:
+      url: https://github.com/rodydavis/path_to_regexp.dart
 ```
 
 Then, run `dart pub get` or `flutter pub get`.
