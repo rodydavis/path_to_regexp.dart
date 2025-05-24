@@ -1,6 +1,6 @@
 # path_to_regexp.dart
 
-> A Dart port of the popular JavaScript `path-to-regexp` library. Turn a path string such as `/user/:name` into a regular expression.
+> A Dart port of the popular JavaScript [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp/tree/master) library. Turn a path string such as `/user/:name` into a regular expression.
 
 This is a pure Dart package.
 
