@@ -27,7 +27,7 @@ import 'package:path_to_regexp/path_to_regexp.dart';
 
 *   **`parse(String path, [ParseOptions? options])`**: Parses a path string into a list of tokens.
 *   **`compile<P extends ParamData>(Object pathOrTokens, [CompileOptions? options])`**: Compiles a path string or tokens into a function that can generate paths.
-*   **`pathToRegexp(Object pathOrTokens, [PathToRegexpOptions? options])`**: Converts a path string or tokens into a `RegExp` and a list of parameter keys.
+*   **`pathToRegExp(Object pathOrTokens, [PathToRegExpOptions? options])`**: Converts a path string or tokens into a `RegExp` and a list of parameter keys.
 *   **`match<P extends ParamData>(Object pathOrPaths, [MatchOptions? options])`**: Creates a function to match paths against a compiled pattern.
 *   **`stringify(TokenData data)`**: Transforms `TokenData` (a sequence of tokens) back into a Path-to-RegExp string.
 
@@ -99,7 +99,7 @@ The `match` function returns a function for matching strings against a path:
 -   **`pathOrPaths`**: `String`, `TokenData`, or `List` of these.
 -   **`options`** _(optional)_: `MatchOptions`
     -   **`decode`**: `Decode` function for decoding strings to params, or `false` to disable all processing. (default: `Uri.decodeComponent`)
-    -   **`sensitive`**: `bool` - Regexp will be case sensitive. (default: `false`)
+    -   **`sensitive`**: `bool` - RegExp will be case sensitive. (default: `false`)
     -   **`trailing`**: `bool` - Allows optional trailing delimiter to match. (default: `true`)
     -   **`end`**: `bool` - Validate the match reaches the end of the string. (default: `true`)
     -   **`delimiter`**: `String` - The default delimiter for segments. (default: `'/'`)
@@ -119,13 +119,13 @@ void main() {
 
 **Please note:** `path_to_regexp` is intended for ordered data (e.g. paths, hosts). It cannot handle arbitrarily ordered data (e.g. query strings, URL fragments, JSON, etc).
 
-## PathToRegexp
+## PathToRegExp
 
-The `pathToRegexp` function returns a `RegexpResult` containing the `RegExp` for matching strings against paths, and a list of `KeyToken`s for understanding the `RegExp.allMatches` results.
+The `pathToRegExp` function returns a `RegExpResult` containing the `RegExp` for matching strings against paths, and a list of `KeyToken`s for understanding the `RegExp.allMatches` results.
 
 -   **`path`**: `String`, `TokenData`, or `List` of these.
--   **`options`** _(optional)_: `PathToRegexpOptions`
-    -   **`sensitive`**: `bool` - Regexp will be case sensitive. (default: `false`)
+-   **`options`** _(optional)_: `PathToRegExpOptions`
+    -   **`sensitive`**: `bool` - RegExp will be case sensitive. (default: `false`)
     -   **`trailing`**: `bool` - Allows optional trailing delimiter to match. (default: `true`)
     -   **`end`**: `bool` - Validate the match reaches the end of the string. (default: `true`)
     -   **`delimiter`**: `String` - The default delimiter for segments. (default: `'/'`)
@@ -135,7 +135,7 @@ The `pathToRegexp` function returns a `RegexpResult` containing the `RegExp` for
 import 'package:path_to_regexp/path_to_regexp.dart';
 
 void main() {
-  final result = pathToRegexp('/foo/:bar');
+  final result = pathToRegExp('/foo/:bar');
   final regExp = result.regExp;
   final keys = result.keys;
 
@@ -274,13 +274,13 @@ void main() {
   print('  Path for id "name": ${toPath({'id': 'name'})}');
   print('  Path for id "café": ${toPath({'id': 'café'})}');
 
-  // Example from "PathToRegexp" section
-  final regexpResult = pathToRegexp('/product/:id');
+  // Example from "PathToRegExp" section
+  final regexpResult = pathToRegExp('/product/:id');
   final regExp = regexpResult.regExp;
   final keys = regexpResult.keys;
   final productMatch = regExp.firstMatch('/product/123');
   if (productMatch != null) {
-    print('\nPathToRegexp Example:');
+    print('\nPathToRegExp Example:');
     print('  Full match: ${productMatch.group(0)}');
     print('  Group 1 (id): ${productMatch.group(1)}');
     if (keys.isNotEmpty) {

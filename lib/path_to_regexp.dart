@@ -22,13 +22,13 @@ class ParseOptions {
   ParseOptions({this.encodePath});
 }
 
-class PathToRegexpOptions {
+class PathToRegExpOptions {
   final bool? end;
   final bool? trailing;
   final bool? sensitive;
   final String? delimiter;
 
-  PathToRegexpOptions({
+  PathToRegExpOptions({
     this.end,
     this.trailing,
     this.sensitive,
@@ -36,7 +36,7 @@ class PathToRegexpOptions {
   });
 }
 
-class MatchOptions implements PathToRegexpOptions {
+class MatchOptions implements PathToRegExpOptions {
   @override
   final bool? end;
   @override
@@ -574,10 +574,10 @@ typedef MatchFunction<P extends ParamData> = MatchResult<P>? Function(
 // Path type for function signatures is `Object`
 // (String, TokenData, or List of these)
 
-class RegexpResult {
+class RegExpResult {
   final RegExp regexp;
   final Keys keys;
-  RegexpResult({required this.regexp, required this.keys});
+  RegExpResult({required this.regexp, required this.keys});
 }
 
 // pathToRegexp, flat, flatten, toRegExp, negate functions
@@ -678,10 +678,10 @@ String _toRegExp(List<FlattenedToken> tokens, String delimiter, Keys keys) {
   return result.toString();
 }
 
-RegexpResult pathToRegexp(Object path, // String, TokenData, or List of these
-    [PathToRegexpOptions? ptro,
+RegExpResult pathToRegExp(Object path, // String, TokenData, or List of these
+    [PathToRegExpOptions? ptro,
     ParseOptions? po]) {
-  final effectivePtro = ptro ?? PathToRegexpOptions();
+  final effectivePtro = ptro ?? PathToRegExpOptions();
   final effectivePo = po ?? ParseOptions();
 
   final String delimiter = effectivePtro.delimiter ?? defaultDelimiter;
@@ -702,7 +702,7 @@ RegexpResult pathToRegexp(Object path, // String, TokenData, or List of these
 
   final RegExp regexp =
       RegExp(pattern, caseSensitive: sensitive, unicode: true);
-  return RegexpResult(regexp: regexp, keys: keys);
+  return RegExpResult(regexp: regexp, keys: keys);
 }
 
 MatchFunction<P> match<P extends ParamData>(Object pathOrPaths,
@@ -724,15 +724,15 @@ MatchFunction<P> match<P extends ParamData>(Object pathOrPaths,
 
   final String delimiter = effectiveMatchOpts.delimiter ?? defaultDelimiter;
 
-  final PathToRegexpOptions ptro = PathToRegexpOptions(
+  final PathToRegExpOptions ptro = PathToRegExpOptions(
     end: effectiveMatchOpts.end,
     trailing: effectiveMatchOpts.trailing,
     sensitive: effectiveMatchOpts.sensitive,
     delimiter: delimiter,
   );
 
-  final RegexpResult regexpResult =
-      pathToRegexp(pathOrPaths, ptro, effectiveParseOpts);
+  final RegExpResult regexpResult =
+      pathToRegExp(pathOrPaths, ptro, effectiveParseOpts);
   final RegExp regexp = regexpResult.regexp;
   final Keys keys = regexpResult.keys;
 
